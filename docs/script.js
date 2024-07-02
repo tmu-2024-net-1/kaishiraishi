@@ -11,7 +11,7 @@ var counter = 0;
 
 function setup() {
   createCanvas(displayWidth, displayHeight);
-  background(255);
+  background(255); // 初期化時に一度だけ背景を白で塗りつぶす
   cursor(CROSS);
   x = mouseX;
   y = mouseY;
@@ -20,10 +20,6 @@ function setup() {
 }
 
 function draw() {
-  fill(240);
-  rect(0, 0, width, height);
-  fill(0, 6);
-  
   if (mouseIsPressed && mouseButton == LEFT) {
     var d = dist(x, y, mouseX, mouseY);
     textSize(fontSizeMin + d / 2);
@@ -32,8 +28,7 @@ function draw() {
 
     if (d > stepSize) {
       var angle = atan2(mouseY - y, mouseX - x);
-
-      // 色をランダムに選択
+      
       var r = random(255);
       var g = random(255);
       var b = random(255);
@@ -47,13 +42,15 @@ function draw() {
       counter++;
       if (counter >= letters.length) counter = 0;
 
-      x = x + cos(angle) * stepSize;
-      y = y + sin(angle) * stepSize;
+      // 移動前に次の位置を計算
+      var newX = x + cos(angle) * stepSize;
+      var newY = y + sin(angle) * stepSize;
+
+      // キャンバスの境界内にテキストを保持する
+      if (newX > 0 && newX < width && newY > 0 && newY < height) {
+        x = newX;
+        y = newY;
+      }
     }
   }
-}
-
-function mousePressed() {
-  x = mouseX;
-  y = mouseY;
 }
