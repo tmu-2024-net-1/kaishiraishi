@@ -8,28 +8,21 @@ var fontSizeMin = 15;
 var angleDistortion = 0.0;
 
 var counter = 0;
-var song;
 
 function setup() {
-  // use full screen size
   createCanvas(displayWidth, displayHeight);
   background(255);
-	song = loadSound('keyboard1.mp3');
   cursor(CROSS);
-
   x = mouseX;
   y = mouseY;
-
   textFont(font);
   textAlign(LEFT);
-  fill(0);
 }
 
 function draw() {
   fill(240);
-  //text("Please touch",100,100);
-  fill(0,6);
-  rect(0,0,width,height);
+  rect(0, 0, width, height);
+  fill(0, 6);
   
   if (mouseIsPressed && mouseButton == LEFT) {
     var d = dist(x, y, mouseX, mouseY);
@@ -39,12 +32,15 @@ function draw() {
 
     if (d > stepSize) {
       var angle = atan2(mouseY - y, mouseX - x);
-			song.play();
+
+      // 色をランダムに選択
+      var r = random(255);
+      var g = random(255);
+      var b = random(255);
+      fill(r, g, b);
 
       push();
       translate(x, y);
-      //rotate(angle + random(angleDistortion));
-      fill(250);
       text(newLetter, 0, 0);
       pop();
 
