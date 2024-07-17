@@ -2,7 +2,9 @@ var x = 0;
 var y = 0;
 var stepSize = 5.0;
 
-var font = 'Georgia';
+var font = 'Zen Old Mincho';
+
+
 var letters = "透明人間";
 var fontSizeMin = 15;
 var angleDistortion = 0.0;
