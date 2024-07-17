@@ -8,3 +8,8 @@ body {
     display: block; /* キャンバスをブロック要素として表示 */
   }
   
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  

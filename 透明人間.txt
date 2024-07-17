@@ -3,16 +3,18 @@ var y = 0;
 var stepSize = 5.0;
 
 var font = 'Georgia';
-var letters = "透明人間";
+var letters = "あい１";
 var fontSizeMin = 15;
 var angleDistortion = 0.0;
 
 var counter = 0;
+var song;
 
 function setup() {
   // use full screen size
   createCanvas(displayWidth, displayHeight);
   background(255);
+
   cursor(CROSS);
 
   x = mouseX;
@@ -20,27 +22,30 @@ function setup() {
 
   textFont(font);
   textAlign(LEFT);
-  fill(255);
-  
-
+  fill(0);
 }
 
 function draw() {
-
+  fill(240);
+  //text("Please touch",100,100);
+  fill(0,6);
+  rect(0,0,width,height);
   
   if (mouseIsPressed && mouseButton == LEFT) {
     var d = dist(x, y, mouseX, mouseY);
-    // 平方根を用いてフォントサイズの変化を滑らかに
-    var adjustedSize = sqrt(d) * 2; // ここでの係数2は、変化の程度を調整します
-    textSize(fontSizeMin + adjustedSize);
+    textSize(fontSizeMin + d / 2);
     var newLetter = letters.charAt(counter);
     stepSize = textWidth(newLetter);
+		
+		
 
     if (d > stepSize) {
       var angle = atan2(mouseY - y, mouseX - x);
+
       push();
       translate(x, y);
-      fill(0);
+      //rotate(angle + random(angleDistortion));
+      fill(250);
       text(newLetter, 0, 0);
       pop();
 

@@ -1,0 +1,60 @@
+var x = 0, y = 0;
+var stepSize = 5.0;
+var letters = "あい";
+var fontSizeMin = 15;
+var angleDistortion = 0.0;
+var counter = 0;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(255);
+  smooth();
+  cursor(CROSS);
+}
+
+function draw() {
+  if (mouseIsPressed && mouseButton === LEFT) {
+    var d = dist(x, y, mouseX, mouseY);
+    var fontSize = fontSizeMin + d / 10;  // ここで変化率を調整
+    textSize(fontSize);
+    var newLetter = letters.charAt(counter);
+    stepSize = textWidth(newLetter);
+
+    if (d > stepSize) {
+      var angle = atan2(mouseY - y, mouseX - x) + random(-angleDistortion, angleDistortion);
+      push();
+      translate(x, y);
+      rotate(angle);
+      fill(0);
+      text(newLetter, 0, 0);
+      pop();
+
+      x += cos(angle) * stepSize;
+      y += sin(angle) * stepSize;
+
+      counter++;
+      if (counter >= letters.length) counter = 0;
+    }
+  }
+}
+
+function mousePressed() {
+  x = mouseX;
+  y = mouseY;
+}
+
+function keyPressed() {
+  if (keyCode === DELETE || keyCode === BACKSPACE) {
+    background(255);
+  } else if (keyCode === UP_ARROW) {
+    angleDistortion += 0.1;
+  } else if (keyCode === DOWN_ARROW) {
+    angleDistortion -= 0.1;
+  } else if (key === 's' || key === 'S') {
+    save("text_path.png");
+  }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
