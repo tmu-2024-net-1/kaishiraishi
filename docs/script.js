@@ -4,12 +4,29 @@ var stepSize = 5.0;
 
 var font = 'Zen Old Mincho';
 
-var letters = "私は、夜を讃美し、夜を怖れる。青い、菜の葉に塩をふりかけて、凋しおれて行く時の色合のような、黙って、息を止めているような、匂いはないけれど、もしこれを求めたら、腥なまぐさい匂い、それも生々しい血汐ちしおの流れている時分の臭いでなく、微かに、ずっと前に、古くからそこに残っている匂いがするような、青い月夜もある。風もなく、雨も降らず、大空には星の光りも隠れて、しかも厚い鉄板を頭の上に張り詰めたような重苦しい、大きな音を立てても、音の通らないような、次第次第に、何等か大きな黒い楯が迫って来て、息の音ねを圧してしまいそうな闇の夜もある。そして、この青白い月夜と黒色の闇の夜とは、私に性質の異った恐怖を与えている。「お繁しげさんも、この頃のように、ああ無駄目むだめが見えるようになっては長くあるまい。」……とは、私の母がいった言葉である。私は、家の前の戸口に立って、青白い薄い帛きぬをこの世の上にかけたような、草木の葉の、色艶も失せて凋れている景色を眺めた。思いなしか、空の色もうるんで、張っている糸の結び目がほぐれたように、不安な月の色は、病女びょうじょの怨うらめしげな、弱った吐息を吹きかけて、力なく拭ぬぐった鏡のように、底気味の悪い、淋しいうちに、厭らしい光りを落していた。こんな晩に夜烏よがらすが啼くと、きっと人が死ぬんだと私は考えて、どうかして烏の啼かないようにと心に希こいねがっていた。お繁は三十三四の痩せた女の人である。もう、二三ヶ月前から心臓病で臥ねているのであるが、この二三日はめっきり衰えて、近所の人々は寄れば、その人の噂をしている。殊に、昨日今日は、医者も一日に二三度ずつ来て、親類の人々も繁しげく出入りしている様子である。私の家と、お繁さんの家とは僅わずかに圃はたけを一つ距へだてているばかりで、その家の屋根が見える。窓に点ともっている燈火ともしびが見える。月の光りは、圃に植えられている、繁った、丈たけの低い野菜の葉の上に流れて、お繁さんの屋根が、灰色にぼうとなって浮き出ていた。いつにない、赤々と点っている窓の障子に映った燈火は、私に、何物かこの夜の中うちに起るべき異常な事件を予知しているように思われて、怪しく胸が躍おどるのを覚えた。私は、かかる夜を讃美し、かかる夜を怖れる西の空が飴色に黄色く色彩いろどられて、曇った日は暮れかかっている。音もない、外の黒い木立の姿が、尼さんの喪服を着て立っているように窓の内から見られた。色の青褪めた、貧ひんに窶やつれた母親が娘の枕元に来た。じっと憂うれわしげに、眼を閉じている苦しげな娘の額際ひたいぎわに手を当てて熱をはかって見た。顔の色は曇って、憂うれわしげに見えたのが、一種の驚きの姿に変った。そして、娘の顔に顔を近よせて、「お前もう、日が暮れるのだよ。夜中になってから、悪くなってお医者様を迎いに行くようなことがあると、いけないから、今の内に迎いに行って来ようか……。」といった。そのふるえた、どこか臆病げな声色こわいろは、外に立っている黙った尼さんのような木立にも聞えるように、窓の内外うちそとには、厭らしい沈黙の他にこの様子を見守っているものがなかった。「夜中になってから……。」この一言は、いかにも北国の淋しい、暗い、物凄い夜を言いふくめている。闇夜に、誰一人通らない田舎道を、曲りまがって、田の中や、五六本並木の立っている処や、二三軒人家のある前を通って、一里余り、もしくは二里も、提燈ちょうちんの火を頼りにとぼとぼと町まで歩いて出かけなければならなかった。――夜更けてから、波の音が聞える。私は、かかる夜を讃美し、かかる夜を怖れる。死は、人間の苦痛の極点きょくてんである。死より、もう悲しいものはないのである。私は、昼間の太陽の眩まぶしげに輝いているうちには、いろいろの物音や、賑にぎやかな声や、人々の姿や、動いている影や色彩いろどりで、悲しいこと、苦しいこともまぎれているが、夜になってから、四辺あたりが静かになって、人が寝静まってしまうと、骨肉みうちのものや、知っている人の死にかかっている枕元に坐って見守っていると、刻々に襲い来る、不安と恐怖に怪しく胸の鼓動の高まるのを覚える。私は、死は人間最終の悲しみであり、悲しみの極点は死であると思い、いかなるものも死を免れぬという考えから、むしろ死に懐なつき親しみたいという考えが生じた。夜と、死と、暗黒と、青白い月とを友として、そんな怖れを喜びにしたロマンチックの芸術を書きたいと思う。";
+var letters1 = "私は、夜を讃美し、夜を怖れる。...";
+var letters2 = "別のテキスト...";
+var letters3 = "さらに別のテキスト...";
+var letters4 = "もう一つ別のテキスト...";
+var letters = letters1;
+
+var titles = ["タイトル1", "タイトル2", "タイトル3", "タイトル4"];
+var authors = ["著者1", "著者2", "著者3", "著者4"];
+var currentTitle = titles[0];
+var currentAuthor = authors[0];
+
 var fontSizeMin = 15;
 var angleDistortion = 0.0;
 
 var counter = 0;
 var fadingTexts = []; // テキストとその透明度を保持する配列
+var titleFadingText = null; // タイトル用の透明度情報を保持するオブジェクト
+var authorFadingText = null; // 著者名用の透明度情報を保持するオブジェクト
+
+var titleX;
+var titleY;
+var authorX;
+var authorY;
 
 function setup() {
   createCanvas(displayWidth, displayHeight);
@@ -20,12 +37,40 @@ function setup() {
   y = mouseY;
 
   textFont(font);
-  textAlign(LEFT);
+  textAlign(CENTER); // 中央揃えに設定
+
+  titleX = width / 2; // タイトルのx座標を画面の中央に
+  titleY = height / 2 - 40; // タイトルのy座標を画面の中央より少し上に
+  authorX = width / 2; // 著者名のx座標を画面の中央に
+  authorY = height / 2; // 著者名のy座標を画面の中央に
+
   fill(0);
 }
 
 function draw() {
   background(255); // 透明度のパラメータを取り除く
+
+  // タイトルの描画と透明度の更新
+  if (titleFadingText) {
+    fill(0, 0, 0, titleFadingText.alpha);
+    textSize(32); // タイトルのフォントサイズ
+    text(titleFadingText.letter, titleX, titleY); // タイトルの座標を指定
+    titleFadingText.alpha -= 2; // 透明度を2ずつ減らす
+    if (titleFadingText.alpha <= 0) {
+      titleFadingText = null; // 透明度が0になったらオブジェクトを破棄
+    }
+  }
+
+  // 著者名の描画と透明度の更新
+  if (authorFadingText) {
+    fill(0, 0, 0, authorFadingText.alpha);
+    textSize(24); // 著者名のフォントサイズ
+    text(authorFadingText.letter, authorX, authorY); // 著者名の座標を指定
+    authorFadingText.alpha -= 2; // 透明度を2ずつ減らす
+    if (authorFadingText.alpha <= 0) {
+      authorFadingText = null; // 透明度が0になったらオブジェクトを破棄
+    }
+  }
 
   // 保存されたテキストの描画と透明度の更新
   fadingTexts.forEach(ft => {
@@ -72,8 +117,36 @@ function draw() {
   }
 }
 
-
 function mousePressed() {
   x = mouseX;
   y = mouseY;
+}
+
+function keyPressed() {
+  if (key === '1') {
+    letters = letters1;
+    currentTitle = titles[0];
+    currentAuthor = authors[0];
+  } else if (key === '2') {
+    letters = letters2;
+    currentTitle = titles[1];
+    currentAuthor = authors[1];
+  } else if (key === '3') {
+    letters = letters3;
+    currentTitle = titles[2];
+    currentAuthor = authors[2];
+  } else if (key === '4') {
+    letters = letters4;
+    currentTitle = titles[3];
+    currentAuthor = authors[3];
+  }
+  counter = 0;
+  titleFadingText = {
+    letter: currentTitle,
+    alpha: 255 // タイトルの初期透明度
+  };
+  authorFadingText = {
+    letter: currentAuthor,
+    alpha: 255 // 著者名の初期透明度
+  };
 }
