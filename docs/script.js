@@ -4,14 +4,14 @@ var stepSize = 5.0;
 
 var font = 'Zen Old Mincho';
 
-var letters1 = "私は、夜を讃美し、夜を怖れる。...";
-var letters2 = "別のテキスト...";
+var letters1 = "私は、夜を讃美し、夜を怖れる。";
+var letters2 = "雨ニモマケズ風ニモマケズ雪ニモ夏ノ暑サニモマケヌ丈夫ナカラダヲモチ慾ハナク決シテ瞋ラズイツモシヅカニワラッテヰル一日ニ玄米四合ト味噌ト少シノ野菜ヲタベアラユルコトヲジブンヲカンジョウニ入レズニヨクミキキシワカリソシテワスレズ野原ノ松ノ林ノ";
 var letters3 = "さらに別のテキスト...";
 var letters4 = "もう一つ別のテキスト...";
 var letters = letters1;
 
-var titles = ["タイトル1", "タイトル2", "タイトル3", "タイトル4"];
-var authors = ["著者1", "著者2", "著者3", "著者4"];
+var titles = ["夜の喜び", "雨ニモマケズ", "タイトル3", "タイトル4"];
+var authors = ["小川未明", "宮沢賢治", "著者3", "著者4"];
 var currentTitle = titles[0];
 var currentAuthor = authors[0];
 
@@ -39,10 +39,10 @@ function setup() {
   textFont(font);
   textAlign(CENTER); // 中央揃えに設定
 
-  titleX = width / 2; // タイトルのx座標を画面の中央に
-  titleY = height / 2 - 40; // タイトルのy座標を画面の中央より少し上に
+  titleX = width / 2 ; // タイトルのx座標を画面の中央に
+  titleY = height / 2 -  width/8; // タイトルのy座標を画面の中央より少し上に
   authorX = width / 2; // 著者名のx座標を画面の中央に
-  authorY = height / 2; // 著者名のy座標を画面の中央に
+  authorY = height / 2 -  width/8 +  width/12; // 著者名のy座標を画面の中央に
 
   fill(0);
 }
@@ -53,7 +53,7 @@ function draw() {
   // タイトルの描画と透明度の更新
   if (titleFadingText) {
     fill(0, 0, 0, titleFadingText.alpha);
-    textSize(32); // タイトルのフォントサイズ
+    textSize(38); // タイトルのフォントサイズ
     text(titleFadingText.letter, titleX, titleY); // タイトルの座標を指定
     titleFadingText.alpha -= 2; // 透明度を2ずつ減らす
     if (titleFadingText.alpha <= 0) {
