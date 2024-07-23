@@ -4,7 +4,7 @@ var stepSize = 5.0;
 
 var font = 'Zen Old Mincho';
 
-var letters1 = "私は、夜を讃美し、夜を怖れる。...";
+var letters1 = "私は、夜を讃美し、夜を怖";
 var letters2 = "別のテキスト...";
 var letters3 = "さらに別のテキスト...";
 var letters4 = "もう一つ別のテキスト...";
@@ -29,6 +29,10 @@ var siteFadingTexts = []; // サイト名の文字情報を保持する配列
 var letterSpacing = 48; // 文字間隔を設定
 var startTime;
 var displayTitle = false; // タイトル表示のフラグ
+
+var endTime = 0; // 終了時間を記録する変数
+var displayEndText = false; // 終了テキスト表示フラグ
+var initialDisplayDone = false; // 初期表示が完了したかどうかのフラグ
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -113,7 +117,7 @@ function draw() {
   }
 
   // タイトルの描画と透明度の更新
-  if (displayTitle) {
+  if (displayTitle && !initialDisplayDone) {
     titleFadingTexts.forEach(ft => {
       if (currentTime - startTime > ft.delay) {
         fill(0, 0, 0, ft.alpha);
@@ -138,6 +142,10 @@ function draw() {
 
     // 透明度が0になったテキストを配列から削除
     authorFadingTexts = authorFadingTexts.filter(ft => ft.alpha > 0);
+
+    if (titleFadingTexts.length === 0 && authorFadingTexts.length === 0) {
+      initialDisplayDone = true; // 初期表示が完了したと設定
+    }
   }
 
   // 残りの文字数インジケーターの描画
@@ -158,7 +166,17 @@ function draw() {
   // 透明度が0になったテキストを配列から削除
   fadingTexts = fadingTexts.filter(ft => ft.alpha > 0);
 
-  if (mouseIsPressed && mouseButton == LEFT) {
+  // 終了テキスト表示フラグが有効で、3秒が経過していない場合は文字描画を無効化
+  if (displayEndText && (currentTime - endTime < 3000)) {
+    fill(0);
+    textSize(32);
+    text("終わり．", width / 2, height / 2);
+    return;
+  } else if (displayEndText && (currentTime - endTime >= 3000)) {
+    displayEndText = false; // 3秒経過後に終了テキスト表示フラグを無効化
+  }
+
+  if (mouseIsPressed && mouseButton == LEFT && !displayEndText && initialDisplayDone) {
     var d = dist(x, y, mouseX, mouseY);
     var adjustedSize = sqrt(d) * 2;
     var fontSize = fontSizeMin + adjustedSize;
@@ -184,7 +202,15 @@ function draw() {
       });
 
       counter++;
-      if (counter >= letters.length) counter = 0;
+      if (counter >= letters.length) {
+        counter = 0;
+        // 残り文字数がゼロになった際に「終わり．」を表示
+        fill(0);
+        textSize(32);
+        text("終わり．", width / 2, height / 2);
+        displayEndText = true; // 終了テキスト表示フラグを有効化
+        endTime = millis(); // 終了時間を記録
+      }
 
       x = x + cos(angle) * stepSize;
       y = y + sin(angle) * stepSize;
@@ -193,56 +219,61 @@ function draw() {
 }
 
 function mousePressed() {
-  x = mouseX;
-  y = mouseY;
+  if (!displayEndText && initialDisplayDone) {
+    x = mouseX;
+    y = mouseY;
+  }
 }
 
 function keyPressed() {
-  if (key === '1') {
-    letters = letters1;
-    currentTitle = titles[0];
-    currentAuthor = authors[0];
-  } else if (key === '2') {
-    letters = letters2;
-    currentTitle = titles[1];
-    currentAuthor = authors[1];
-  } else if (key === '3') {
-    letters = letters3;
-    currentTitle = titles[2];
-    currentAuthor = authors[2];
-  } else if (key === '4') {
-    letters = letters4;
-    currentTitle = titles[3];
-    currentAuthor = authors[3];
-  }
-  counter = 0;
-  titleFadingTexts = [];
-  authorFadingTexts = [];
-  titleX = width / 2 - (currentTitle.length * letterSpacing) / 2;
-  titleY = height / 2 - 40;
-  authorX = width / 2 - (currentAuthor.length * letterSpacing) / 2;
-  authorY = height / 2 + 20;
+  if (!displayEndText) {
+    if (key === '1') {
+      letters = letters1;
+      currentTitle = titles[0];
+      currentAuthor = authors[0];
+    } else if (key === '2') {
+      letters = letters2;
+      currentTitle = titles[1];
+      currentAuthor = authors[1];
+    } else if (key === '3') {
+      letters = letters3;
+      currentTitle = titles[2];
+      currentAuthor = authors[2];
+    } else if (key === '4') {
+      letters = letters4;
+      currentTitle = titles[3];
+      currentAuthor = authors[3];
+    }
+    counter = 0;
+    titleFadingTexts = [];
+    authorFadingTexts = [];
+    titleX = width / 2 - (currentTitle.length * letterSpacing) / 2;
+    titleY = height / 2 - 40;
+    authorX = width / 2 - (currentAuthor.length * letterSpacing) / 2;
+    authorY = height / 2 + 20;
 
-  for (let i = 0; i < currentTitle.length; i++) {
-    let char = currentTitle.charAt(i);
-    titleFadingTexts.push({
-      letter: char,
-      x: titleX + i * letterSpacing,
-      y: titleY,
-      alpha: 255,
-      delay: i * 200
-    });
-  }
+    for (let i = 0; i < currentTitle.length; i++) {
+      let char = currentTitle.charAt(i);
+      titleFadingTexts.push({
+        letter: char,
+        x: titleX + i * letterSpacing,
+        y: titleY,
+        alpha: 255,
+        delay: i * 200
+      });
+    }
 
-  for (let i = 0; i < currentAuthor.length; i++) {
-    let char = currentAuthor.charAt(i);
-    authorFadingTexts.push({
-      letter: char,
-      x: authorX + i * letterSpacing,
-      y: authorY,
-      alpha: 255,
-      delay: i * 200
-    });
+    for (let i = 0; i < currentAuthor.length; i++) {
+      let char = currentAuthor.charAt(i);
+      authorFadingTexts.push({
+        letter: char,
+        x: authorX + i * letterSpacing,
+        y: authorY,
+        alpha: 255,
+        delay: i * 200
+      });
+    }
+    initialDisplayDone = false; // 新しいタイトルと著者を設定する際に初期表示フラグをリセット
   }
 }
 
