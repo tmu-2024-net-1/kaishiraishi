@@ -26,14 +26,14 @@ var fontSizeMin = 15;
 var angleDistortion = 0.0;
 
 var counter = 0;
-var fadingTexts = []; // テキストとその透明度を保持する配列
-var titleFadingTexts = []; // タイトル用の文字情報を保持する配列
-var authorFadingTexts = []; // 著者名用の文字情報を保持する配列
+var fadingTexts = []; // テキストとその透明度を保持
+var titleFadingTexts = []; // タイトル用の文字情報を保持
+var authorFadingTexts = []; // 著者名用の文字情報を保持
 
 var siteTitle = "線小説"; // サイト名
 var siteTitleX, siteTitleY;
-var siteFadingTexts = []; // サイト名の文字情報を保持する配列
-var letterSpacing = 48; // 文字間隔を設定
+var siteFadingTexts = []; // サイト名の文字情報を保持
+var letterSpacing = 48; // 文字間隔を得ってい
 var startTime;
 var displayTitle = false; // タイトル表示のフラグ
 
@@ -50,7 +50,7 @@ function setup() {
   y = mouseY;
 
   textFont(font);
-  textAlign(CENTER); // 中央揃えに設定
+  textAlign(CENTER); 
 
   siteTitleX = width / 2 - (siteTitle.length * letterSpacing) / 2;
   siteTitleY = height / 2;
@@ -98,7 +98,7 @@ function setup() {
 
   fill(0);
 
-  startTime = millis(); // 現在の時間を記録
+  startTime = millis(); // 現在の時間を記憶
 }
 
 function draw() {
