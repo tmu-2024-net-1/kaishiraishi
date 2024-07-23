@@ -30,7 +30,7 @@ var fadingTexts = []; // テキストとその透明度を保持
 var titleFadingTexts = []; // タイトル用の文字情報を保持
 var authorFadingTexts = []; // 著者名用の文字情報を保持
 
-var siteTitle = "線小説"; // サイト名
+var siteTitle = "指小説"; // サイト名
 var siteTitleX, siteTitleY;
 var siteFadingTexts = []; // サイト名の文字情報を保持
 var letterSpacing = 48; // 文字間隔を得ってい
