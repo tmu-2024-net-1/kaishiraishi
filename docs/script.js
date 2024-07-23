@@ -20,13 +20,15 @@ var angleDistortion = 0.0;
 
 var counter = 0;
 var fadingTexts = []; // テキストとその透明度を保持する配列
-var titleFadingText = null; // タイトル用の透明度情報を保持するオブジェクト
-var authorFadingText = null; // 著者名用の透明度情報を保持するオブジェクト
+var titleFadingTexts = []; // タイトル用の文字情報を保持する配列
+var authorFadingTexts = []; // 著者名用の文字情報を保持する配列
 
-var siteTitle = "線小説"; 
+var siteTitle = "線小説"; // サイト名
 var siteTitleX, siteTitleY;
 var siteFadingTexts = []; // サイト名の文字情報を保持する配列
 var letterSpacing = 48; // 文字間隔を設定
+var startTime;
+var displayTitle = false; // タイトル表示のフラグ
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -49,30 +51,94 @@ function setup() {
       letter: char,
       x: siteTitleX + i * letterSpacing,
       y: siteTitleY,
-      alpha: 255
+      alpha: 255,
+      delay: i * 200 // 各文字が順番にフェードアウトを開始する遅延時間
     });
   }
 
-  titleX = width / 2; // タイトルのx座標を画面の中央に
+  titleX = width / 2 - (currentTitle.length * letterSpacing) / 2; // タイトルのx座標を画面の中央に
   titleY = height / 2 - 40; // タイトルのy座標を画面の中央より少し上に
-  authorX = width / 2; // 著者名のx座標を画面の中央に
-  authorY = height / 2; // 著者名のy座標を画面の中央に
+  authorX = width / 2 - (currentAuthor.length * letterSpacing) / 2; // 著者名のx座標を画面の中央に
+  authorY = height / 2 + 20; // 著者名のy座標を画面の中央に
+
+  // タイトルの文字情報を配列に格納
+  for (let i = 0; i < currentTitle.length; i++) {
+    let char = currentTitle.charAt(i);
+    titleFadingTexts.push({
+      letter: char,
+      x: titleX + i * letterSpacing,
+      y: titleY,
+      alpha: 255,
+      delay: i * 200 // 各文字が順番にフェードアウトを開始する遅延時間
+    });
+  }
+
+  // 著者名の文字情報を配列に格納
+  for (let i = 0; i < currentAuthor.length; i++) {
+    let char = currentAuthor.charAt(i);
+    authorFadingTexts.push({
+      letter: char,
+      x: authorX + i * letterSpacing,
+      y: authorY,
+      alpha: 255,
+      delay: i * 200 // 各文字が順番にフェードアウトを開始する遅延時間
+    });
+  }
 
   fill(0);
+
+  startTime = millis(); // 現在の時間を記録
 }
 
 function draw() {
   background(255); // 透明度のパラメータを取り除く
 
-  // サイト名の表示と透明度の更新
-  siteFadingTexts.forEach((ft, index) => {
-    fill(0, 0, 0, ft.alpha);
-    textSize(48); // サイト名のフォントサイズ
-    text(ft.letter, ft.x, ft.y);
-    ft.alpha -= 2; // 透明度を2ずつ減らす
-    ft.x -= 0; // 少しずつ左に移動して消えるエフェクト
-    ft.y -= 0.1 * index; // 少しずつ上に移動して消えるエフェクト
+  var currentTime = millis();
+  siteFadingTexts.forEach(ft => {
+    if (currentTime - startTime > ft.delay) {
+      fill(0, 0, 0, ft.alpha);
+      textSize(48); // サイト名のフォントサイズ
+      text(ft.letter, ft.x, ft.y);
+      ft.alpha -= 2; // 透明度を2ずつ減らす
+    }
   });
+
+  // 透明度が0になったテキストを配列から削除
+  siteFadingTexts = siteFadingTexts.filter(ft => ft.alpha > 0);
+
+  // サイト名のフェードアウトが完了したらタイトルと著者を表示
+  if (siteFadingTexts.length === 0 && !displayTitle) {
+    displayTitle = true;
+    startTime = millis(); // タイトル表示開始時間を記録
+  }
+
+  // タイトルの描画と透明度の更新
+  if (displayTitle) {
+    titleFadingTexts.forEach(ft => {
+      if (currentTime - startTime > ft.delay) {
+        fill(0, 0, 0, ft.alpha);
+        textSize(32); // タイトルのフォントサイズ
+        text(ft.letter, ft.x, ft.y);
+        ft.alpha -= 2; // 透明度を2ずつ減らす
+      }
+    });
+
+    // 透明度が0になったテキストを配列から削除
+    titleFadingTexts = titleFadingTexts.filter(ft => ft.alpha > 0);
+
+    // 著者名の描画と透明度の更新
+    authorFadingTexts.forEach(ft => {
+      if (currentTime - startTime > ft.delay) {
+        fill(0, 0, 0, ft.alpha);
+        textSize(24); // 著者名のフォントサイズ
+        text(ft.letter, ft.x, ft.y);
+        ft.alpha -= 2; // 透明度を2ずつ減らす
+      }
+    });
+
+    // 透明度が0になったテキストを配列から削除
+    authorFadingTexts = authorFadingTexts.filter(ft => ft.alpha > 0);
+  }
 
   // 残りの文字数インジケーターの描画
   var remaining = letters.length - counter;
@@ -80,28 +146,6 @@ function draw() {
   fill(0);
   noStroke();
   rect(0, 0, width * progress, 10); // 残りの文字数に応じてインジケーターの幅を調整
-
-  // タイトルの描画と透明度の往診
-  if (titleFadingText) {
-    fill(0, 0, 0, titleFadingText.alpha);
-    textSize(32); // タイトルのフォントサイズ
-    text(titleFadingText.letter, titleX, titleY); // タイトルの座標を指定
-    titleFadingText.alpha -= 2; // 透明度を2ずつ減らす
-    if (titleFadingText.alpha <= 0) {
-      titleFadingText = null; // 透明度が0になったらオブジェクトを破棄
-    }
-  }
-
-  // 著者名の描画と透明度の更新
-  if (authorFadingText) {
-    fill(0, 0, 0, authorFadingText.alpha);
-    textSize(24); // 著者名のフォントサイズ
-    text(authorFadingText.letter, authorX, authorY); // 著者名の座標を指定
-    authorFadingText.alpha -= 2; // 透明度を2ずつ減らす
-    if (authorFadingText.alpha <= 0) {
-      authorFadingText = null; // 透明度が0になったらオブジェクトを破棄
-    }
-  }
 
   // 保存されたテキストの描画と透明度の更新
   fadingTexts.forEach(ft => {
@@ -172,23 +216,42 @@ function keyPressed() {
     currentAuthor = authors[3];
   }
   counter = 0;
-  titleFadingText = {
-    letter: currentTitle,
-    alpha: 255 // タイトルの初期透明度
-  };
-  authorFadingText = {
-    letter: currentAuthor,
-    alpha: 255 // 著者名の初期透明度
-  };
+  titleFadingTexts = [];
+  authorFadingTexts = [];
+  titleX = width / 2 - (currentTitle.length * letterSpacing) / 2;
+  titleY = height / 2 - 40;
+  authorX = width / 2 - (currentAuthor.length * letterSpacing) / 2;
+  authorY = height / 2 + 20;
+
+  for (let i = 0; i < currentTitle.length; i++) {
+    let char = currentTitle.charAt(i);
+    titleFadingTexts.push({
+      letter: char,
+      x: titleX + i * letterSpacing,
+      y: titleY,
+      alpha: 255,
+      delay: i * 200
+    });
+  }
+
+  for (let i = 0; i < currentAuthor.length; i++) {
+    let char = currentAuthor.charAt(i);
+    authorFadingTexts.push({
+      letter: char,
+      x: authorX + i * letterSpacing,
+      y: authorY,
+      alpha: 255,
+      delay: i * 200
+    });
+  }
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 
   // キャンバスがリサイズされた時に中央揃えの座標を再計算
-  titleX = width / 2;
+  titleX = width / 2 - (currentTitle.length * letterSpacing) / 2;
   titleY = height / 2 - 40;
-  authorX = width / 2;
-  authorY = height / 2;
+  authorX = width / 2 - (currentAuthor.length * letterSpacing) / 2;
+  authorY = height / 2 + 20;
 }
-1
