@@ -12,3 +12,16 @@ canvas {
   top: 0;
   left: 0;
 }
+
+#site-name {
+  color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  font-family: 'Zen Old Mincho', serif;
+  opacity: 1;
+  transition: opacity 2s ease-in-out;
+  z-index: 2;
+}

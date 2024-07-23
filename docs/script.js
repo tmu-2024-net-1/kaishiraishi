@@ -23,10 +23,10 @@ var fadingTexts = []; // テキストとその透明度を保持する配列
 var titleFadingText = null; // タイトル用の透明度情報を保持するオブジェクト
 var authorFadingText = null; // 著者名用の透明度情報を保持するオブジェクト
 
-var titleX;
-var titleY;
-var authorX;
-var authorY;
+var siteTitle = "線小説"; 
+var siteTitleX, siteTitleY;
+var siteFadingTexts = []; // サイト名の文字情報を保持する配列
+var letterSpacing = 48; // 文字間隔を設定
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -39,6 +39,20 @@ function setup() {
   textFont(font);
   textAlign(CENTER); // 中央揃えに設定
 
+  siteTitleX = width / 2 - (siteTitle.length * letterSpacing) / 2;
+  siteTitleY = height / 2;
+
+  // サイト名の文字情報を配列に格納
+  for (let i = 0; i < siteTitle.length; i++) {
+    let char = siteTitle.charAt(i);
+    siteFadingTexts.push({
+      letter: char,
+      x: siteTitleX + i * letterSpacing,
+      y: siteTitleY,
+      alpha: 255
+    });
+  }
+
   titleX = width / 2; // タイトルのx座標を画面の中央に
   titleY = height / 2 - 40; // タイトルのy座標を画面の中央より少し上に
   authorX = width / 2; // 著者名のx座標を画面の中央に
@@ -50,6 +64,16 @@ function setup() {
 function draw() {
   background(255); // 透明度のパラメータを取り除く
 
+  // サイト名の表示と透明度の更新
+  siteFadingTexts.forEach((ft, index) => {
+    fill(0, 0, 0, ft.alpha);
+    textSize(48); // サイト名のフォントサイズ
+    text(ft.letter, ft.x, ft.y);
+    ft.alpha -= 2; // 透明度を2ずつ減らす
+    ft.x -= 0; // 少しずつ左に移動して消えるエフェクト
+    ft.y -= 0.1 * index; // 少しずつ上に移動して消えるエフェクト
+  });
+
   // 残りの文字数インジケーターの描画
   var remaining = letters.length - counter;
   var progress = remaining / letters.length; // 残りの文字数の割合を計算
@@ -57,7 +81,7 @@ function draw() {
   noStroke();
   rect(0, 0, width * progress, 10); // 残りの文字数に応じてインジケーターの幅を調整
 
-  // タイトルの描画と透明度の更新
+  // タイトルの描画と透明度の往診
   if (titleFadingText) {
     fill(0, 0, 0, titleFadingText.alpha);
     textSize(32); // タイトルのフォントサイズ
@@ -167,3 +191,4 @@ function windowResized() {
   authorX = width / 2;
   authorY = height / 2;
 }
+1
