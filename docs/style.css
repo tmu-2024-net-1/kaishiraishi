@@ -25,3 +25,106 @@ canvas {
   transition: opacity 2s ease-in-out;
   z-index: 2;
 }
+
+
+/* ハンバーガーメニューアイコンのスタイル */
+.menu-icon {
+  position: fixed;
+  top: 15px;
+  right: 10px;
+  z-index: 1000; /* 他の要素の上に表示 */
+  cursor: pointer;
+  width: 3em;
+  height: auto;
+  
+}
+
+/* 既存のCSSはそのままで、以下を追加または修正 */
+
+/* 既存のCSSはそのままで、.navigationのスタイルを以下のように変更します */
+
+.navigation {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: rgba(241, 241, 241, 0.0); /* 半透明の背景色 */
+  transition: right 0.3s ease-in-out;
+  z-index: 999;
+  backdrop-filter: blur(5px); /* 背景をぼかす効果（モダンブラウザ向け） */
+}
+
+/* オプション：テキストの読みやすさを確保するためにリンクの色を調整 */
+.navigation ul li a {
+  text-decoration: none;
+  color: #000; /* より濃い色に変更 */
+  font-size: 18px;
+  font-weight: bold; /* テキストを太字に */
+}
+
+.navigation.open {
+  right: 0; /* メニューを画面内に表示 */
+}
+
+.navigation ul {
+  list-style-type: none;
+  padding: 20px;
+}
+
+.navigation ul li {
+  margin-bottom: 10px;
+}
+
+.navigation ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  font-family: 'Zen Old Mincho', serif;
+}
+
+/* 既存のCSSはそのままで、以下を追加 */
+
+#content-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(128, 128, 128, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: 'Zen Old Mincho', serif;
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#content-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+#content-overlay h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+#content-overlay p {
+  font-size: 24px;
+  line-height: 1.5;
+  max-width: 80%;
+  text-align: center;
+}

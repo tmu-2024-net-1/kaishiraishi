@@ -2,15 +2,74 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>指小説</title>
+    <title>私小説</title>
     <link rel="stylesheet" href="style.css">
     <script src="libraries/p5.min.js"></script>
     <script src="script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho&display=swap" rel="stylesheet">
+    
+
+    <!-- PNG形式のファビコンを使用する場合 -->
+    <link rel="icon" href="images/favicon.jpg" type="image/jpeg">
+    
 </head>
 <body>
     <div id="site-name"></div>
+    <div id="content-overlay"></div>
+    <!-- ハンバーガーメニューの追加 -->
+    <div class="menu-icon" onclick="toggleMenu()">
+        <img src="images/menu.svg" alt="メニュー">
+    </div>
+    <!-- ナビゲーションメニュー -->
+    <div class="navigation">
+        <ul>
+            <li><a href="#" onclick="showContent('usage')">使い方</a></li>
+            <li><a href="#" onclick="showContent('author')">作者</a></li>
+        </ul>
+    </div>
 </body>
 </html>
+
+<script>
+function toggleMenu() {
+    const navigation = document.querySelector('.navigation');
+    navigation.classList.toggle('open');
+}
+function showContent(contentType) {
+    const overlay = document.getElementById('content-overlay');
+    const navigation = document.querySelector('.navigation');
+    
+    // ナビゲーションを閉じる
+    navigation.classList.remove('open');
+    
+    // コンテンツタイプに応じてHTMLを設定
+    if (contentType === 'usage') {
+        overlay.innerHTML = `
+            <div class="content-container">
+                <h2>使い方</h2>
+                <p>マウスをドラッグすることによって文字を描画することができます。<br><br>
+                数字キーを使用して小説を切り替えることができます。</p>
+            </div>
+        `;
+    } else if (contentType === 'author') {
+        
+        overlay.innerHTML = `
+            <div class="content-container">
+                <h2>作者</h2>
+                <p>2003年生まれ芸術工学を専攻している大学生．普段全く本を読まない．そんな自分でも読書が楽しくなるようなサイトを目指し制作した．<br>
+                contact:shiraishi257853@gmail.com。</p>
+            </div>
+        `;
+    }
+    
+    // オーバーレイを表示
+    overlay.classList.add('visible');
+    
+    // 5秒後にオーバーレイをフェードアウト
+    setTimeout(() => {
+        overlay.classList.remove('visible');
+    }, 5000);
+}
+</script>
